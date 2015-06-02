@@ -72,7 +72,7 @@ function wp_paged_gallery($output, $attr )
     //PAGINATION SETUP END HERE-------------------------------------//
 
 
-    //GALLERY OUTPUT START HERE---------------------------------------//
+     //GALLERY OUTPUT START HERE---------------------------------------//
     $output = '<div id="gallery-1" class="gallery galleryid-'.$post->ID.' gallery-columns-'.$columns.' gallery-size-'.$size.'">';
     $counter = 0;
     $pos = 0;
@@ -81,11 +81,12 @@ function wp_paged_gallery($output, $attr )
        if(($counter < $per_page)&&($pos > $offset))
         {   $counter++;
             $largetitle = get_the_title($attachment->ID);
-            $link = ($link=='file')?wp_get_attachment_image_src($id, 'full') : (($link=='none')? "": get_permalink($id));  
-            $link=($link=='file')?$link[0]:$link;
 
+            $currentlink = ($link=='file')?wp_get_attachment_image_src($id, 'full') : (($link=='none')? "": get_permalink($id));  
+            $currentlink=($link=='file')?$currentlink[0]:$currentlink;
+            
             $img = wp_get_attachment_image_src($id, $size);        
-            $output .= "<".$itemtag." class='gallery-item'><".$icontag." class='gallery-icon'><a href=\"{$largeimg[0]}\"  title=\"{$largetitle}\"><img src=\"{$img[0]}\" width=\"{$img[1]}\" height=\"{$img[2]}\" alt=\"{$largetitle}\" /></a></".$icontag."></".$itemtag.">\n";
+            $output .= "<".$itemtag." class='gallery-item'><".$icontag." class='gallery-icon'><a href=\"{$currentlink}\"  title=\"{$largetitle}\"><img src=\"{$img[0]}\" width=\"{$img[1]}\" height=\"{$img[2]}\" alt=\"{$largetitle}\" /></a></".$icontag."></".$itemtag.">\n";
         }
 
     }  
